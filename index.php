@@ -1,213 +1,243 @@
 <?php
 //assignment 1
-function greeting($name, $type = "")
-{
-    if ($type == "Female") {
-        $type = "Miss";
-    } elseif ($type == "Male") {
-        $type = "Mr";
-    }
-    return  "Hello $type $name <br>";
-}
+$friends = [
+    "AG" => "Ahmed Gamal",
+    "OM" => "Osama Mohamed",
+    "MG" => "Mahmoud Gamal",
+    "AS" => "Ahmed Samy",
+    "FA" => "Farid Ahmed",
+    "SM" => "Sayed Mohamed"
+];
 
-// Needed Output
-echo greeting("Osama", "Male"); // Hello Mr Osama
-echo greeting("Eman", "Female"); // Hello Miss Eman
-echo greeting("Sameh"); // Hello Sameh
-echo '<br>';
-echo '<br>';
+echo "<pre>";
+print_r(array_chunk(array_change_key_case($friends), 2, true));
+echo "<br>";
+echo "<br>";
 
 
 //assignment 2
-function get_arguments(...$all)
-{
-    foreach ($all as $a) {
-        echo  "$a ";
-    }
-    echo '<br>';
-}
-echo get_arguments("Hello", "Elzero", "Web", "School"); // Hello Elzero Web School
-echo get_arguments("I", "Love", "PHP"); // I Love PHP
-echo '<br>';
+$codes = ["H", "C", "J"];
+$means = ["HTML", "CSS", "JavaScript"];
+
+echo "<pre>";
+print_r(array_change_key_case(array_combine($codes, $means)));
+echo "<br>";
+echo "<br>";
 
 
-//assignment 2
-$all = ["Hello ", "Elzero ", "Web ", "School "];
-function get_arguments_two(...$all)
-{
-    foreach ($all as $a) {
-        echo  "$a ";
-    }
-    echo '<br>';
-}
-echo get_arguments_two(...$all); // Hello Elzero Web School
-echo '<br>';
-echo '<br>';
-
-
-
-
-//assignment 3
-function sum_all(...$numbers)
-{
-    $sum = 0;
-    foreach ($numbers as $number) {
-        if ($number == 5) {
-            continue;
-        }
-        if ($number == 10) {
-            $number = 20;
-        }
-
-        $sum  += $number;
-    }
-    return $sum;
-}
-echo sum_all(10, 12, 5, 6, 6, 10) . '<br>'; // 64
-echo sum_all(5, 10, 5, 10); // 40
-echo '<br>';
-echo '<br>';
-
-//assignment 4
-function multiply(...$numbers)
-{
-    $multiply = 1;
-    foreach ($numbers as $number) {
-        if (gettype($number) == "string") {
-            continue;
-        } elseif (gettype($number) == "double" || gettype($number) == "float") {
-            $number = (int)$number;
-        }
-
-        $multiply *= $number;
-    }
-    return $multiply;
-}
-echo multiply(10, 20) . '<br>'; // 200
-echo multiply("A", 10, 30) . '<br>'; // 300
-echo multiply(100.5, 10, "B") . '<br>'; // 1000
-echo '<br>';
-echo '<br>';
+//assignment 3 
+$friends = [
+    "Ahmed Gamal" => "AG",
+    "Osama Mohamed" => "OM",
+    "Mahmoud Gamal" => "MG",
+    "Ahmed Samy" => "AS"
+];
+echo "<pre>";
+print_r(array_change_key_case((array_reverse(array_combine(array_values($friends), array_keys($friends))))));
+echo "<br>";
+echo "<br>";
 
 
 //assignment 5
-function check_status($a, $b, $c)
-{
-    foreach (func_get_args() as $arg) {
-        $type = gettype($arg);
-        if ($type == "string") {
-            $name = $arg;
-        } elseif ($type == "integer") {
-            $age = $arg;
-        } else {
-            if ($arg == true) {
-                $hire = "Available ";
-            } else {
-                $hire = "Not Available";
-            }
-        }
+$sum = 0 ;
+$nums = [5, 10, 20, 5, 30, 40];
+foreach($nums as $num){
+    if($num == 5){
+        continue ;
     }
-    return "Hello $name, Your Age Is $age, You Are $hire For Hire <br>";
+    $sum += $num ;
 }
-// Needed Output
-echo check_status("Osama", 38, true); // "Hello Osama, Your Age Is 38, You Are Available For Hire"
-echo check_status(38, "Osama", true); // "Hello Osama, Your Age Is 38, You Are Available For Hire"
-echo check_status(true, 38, "Osama"); // "Hello Osama, Your Age Is 38, You Are Available For Hire"
-echo check_status(false, "Osama", 38); // "Hello Osama, Your Age Is 38, You Are Not Available For Hire"
-echo '<br>';
-echo '<br>';
+echo $sum ."<br>"; //100
+
+//new solution assignment 5
+$sum = 0 ;
+$nums = [5, 10, 20, 5, 30, 40];
+function check($num){
+    return $num != 5 ;
+}
+foreach(array_filter($nums,"check") as $num){
+    $sum += $num ;
+}
+echo $sum ."<br>"; //100
+echo "<br>";
+echo "<br>";
+
 
 
 //assignment 6
-function add($num1, $num2)
-{
-    return $num1 + $num2;
+$chars = ["A", "B", "C", "D", "E"];
+$char = "@@";
+$zero = 0;
+
+echo "<pre>";
+print_r(array_pad($chars, 10, $char[$zero]));
+echo "<br>";
+echo "<br>";
+
+
+//assignment 7
+$names = ["Osama", "Ahmed", "Sayed", "Mahmoud", "Ali"];
+
+next($names);
+next($names);
+echo current($names) . "<br>"; // "Sayed"
+
+next($names);
+next($names);
+echo current($names) . "<br>"; // "Ali"
+
+prev($names);
+prev($names);
+prev($names);
+prev($names);
+echo current($names) . "<br>"; // "Osama"
+
+end($names);
+prev($names);
+echo current($names) . "<br>"; // "Mahmoud"
+echo "<br>";
+echo "<br>"; 
+
+
+//assignment 8
+$chars = ["A", "B", "C"];
+$char = ["D"];
+
+echo "<pre>";
+print_r(array_pad($chars, 4, $char[0])) . "<br>"; // 1
+print_r(array_merge($chars, $char)) . "<br>";     // 2
+
+$chars[] = "D";
+print_r($chars);                                  // 3
+
+array_push($chars,  $char[0]);
+print_r($chars) . "<br>";                         // 4
+echo "<br>";
+echo "<br>"; 
+
+
+//assignment 9
+$nums = [1, 2, 3, 4, 5, 6];
+print_r(array_slice($nums ,1,3,true)) . "<br>";               
+echo "<br>";
+echo "<br>"; 
+
+//assignment 10
+$mix = [1, 2, 3, "A", "B", "C", 7, 8, 9];
+$nums = [4, 5, 6];
+print_r(array_replace($mix, $nums));
+// Output
+// Array
+// (
+//   [0] => 1
+//   [1] => 2
+//   [2] => 3
+//   [3] => 4
+//   [4] => 5
+//   [5] => 6
+//   [6] => 7
+//   [7] => 8
+//   [8] => 9
+// )
+echo "<br>";
+echo "<br>"; 
+
+
+
+//assignment 11
+$arrs = ["A", "B", "C", "D", "E"];
+$num = 0;
+foreach ($arrs as $arr) {
+    $num += 1;
 }
-function subtract($num1, $num2)
-{
-    return $num1 - $num2;
+echo $num . "<br>"; // 5
+echo "<br>";
+
+
+//assignment 12
+$nums = [11, 2, 10, 7, 20, 50];
+$sum = 0;
+foreach ($nums as $num) {
+    $sum += $num;
 }
-function multi($num1, $num2)
-{
-    return ($num1 * $num2);
-}
-function calculate($num1, $num2, $process = "")
-{
-    // echo $process ;
-    if ($process == "add" || $process == "a" || $process == "") {
-        echo add($num1, $num2) . "<br>";
-    } elseif ($process === "subtract" || $process === "s") {
-        echo subtract($num1, $num2) . "<br>";
-    } elseif ($process === "multiply" || $process === "m") {
-        echo multi($num1, $num2) . "<br>";
-    } else {
-        echo "this process not found <br>";
+echo $sum . "<br>"; //100
+echo "<br>";
+
+
+
+//assignment 13
+$nums = [10, 100, -20, 50, 30];
+$biggest_num  = $nums[0];
+foreach ($nums as $num) {
+    if ($num > $biggest_num) {
+        $biggest_num = $num;
     }
 }
-echo calculate(10, 20); // 30
-echo calculate(10, 20, "a"); // 30
-echo calculate(10, 20, "s"); // -10
-echo calculate(10, 20, "subtract"); // -10
-echo calculate(10, 20, "multiply"); // 200
-echo calculate(10, 20, "m"); // 200
-echo '<br>';
-echo '<br>';
+echo $biggest_num . "<br>"; //100
+echo "<br>";
 
 
-//assignment 6
-function calculate_two($num1, $num2, $process = "")
-{
-    // echo $process ;
-    if ($process == "add" || $process == "a" || $process == "") {
-        echo $num1 + $num2 . "<br>";
-    } elseif ($process === "subtract" || $process === "s") {
-        echo $num1 - $num2 . "<br>";
-    } elseif ($process === "multiply" || $process === "m") {
-        echo ($num1 * $num2) . "<br>";
-    } else {
-        echo "this process not found <br>";
+//assignment 14
+$smallest_num  = $nums[0];
+foreach ($nums as $num) {
+    if ($num < $smallest_num) {
+        $smallest_num = $num;
     }
 }
-echo calculate_two(10, 20); // 30
-echo calculate_two(10, 20, "a"); // 30
-echo calculate_two(10, 20, "s"); // -10
-echo calculate_two(10, 20, "subtract"); // -10
-echo calculate_two(10, 20, "multiply"); // 200
-echo calculate_two(10, 20, "m"); // 200
-echo '<br>';
-echo '<br>';
+echo $smallest_num . "<br>"; // -20
+echo "<br>";
 
 
-// assignment 7
-function calculate_assignment_7(int $num_one, int $num_two): float
-{
-    return $num_one + $num_two;
+
+//assignment 15
+$chars = ["o", "r", "e", "z", "l", "E"];
+$num = 0;
+
+foreach ($chars as $char) {
+    $num += 1;
 }
-echo calculate_assignment_7(20, 10) . "<br>"; // 30
-echo gettype(calculate_assignment_7(20, 10)) . "<br>"; // Double
-echo '<br>';
-echo '<br>';
+$nums_array = $num - 1; // 5
 
-// assignment 8
-$message = "Hello ";
-$Hello = function ($name) use ($message) {
-    return $message . $name;
-};
-echo $Hello("Osama"); // Hello Osama
-echo '<br>';
+$out  = "";
 
-// assignment 8
-function Hello($name)
-{
-    $message = "Hello ";
-    return $message . $name;
+for ($nums_array ; $nums_array >= 0 ; $nums_array--) {
+    $out .= $chars[$nums_array];
 }
-$Hello = "Hello";
-echo $Hello("Osama"); // Hello Osama
-echo '<br>';
-echo '<br>';
+echo $out . "<br>"; // Elzero
+echo "<br>";
 
 
-// assignment 9
-$greet = fn ($name) => "hi $name ";
-echo $greet("Osama") . '<br>'; // Greetings
+
+//assignment 17
+$nums = [1, 2, 3, 4, 5, 6];
+$suffle_nums = [];
+
+for ($i = 0; count($suffle_nums) <= 5; $i++) {
+    $rand = rand(0, 5);
+    $num = $nums[$rand];
+
+    if (!in_array($num, $suffle_nums)) {
+        $suffle_nums[] = $nums[$rand];
+    }
+}
+echo "<pre>";
+print_r($suffle_nums);
+echo "<pre>";
+
+
+
+//assignment 18
+$search = ["&", "\$", "0"];
+$replace = ["l", "e", "o"];
+$title = "E&z\$r0 W\$b Sch00&";
+
+$result = str_replace($search, $replace, $title);
+echo $result . "<br>";  // "Elzero Web School"
+
+if (!in_array($num, $suffle_nums)) {
+    $suffle_nums[] = $nums[$rand];
+}
+$arrOne = str_split($title);
+$arrTwo = str_split($result);
+
+echo count(array_diff($arrOne, $arrTwo));   // 7
