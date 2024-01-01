@@ -18,7 +18,6 @@ echo "<br>";
 //assignment 2
 $codes = ["H", "C", "J"];
 $means = ["HTML", "CSS", "JavaScript"];
-
 echo "<pre>";
 print_r(array_change_key_case(array_combine($codes, $means)));
 echo "<br>";
@@ -38,27 +37,49 @@ echo "<br>";
 echo "<br>";
 
 
-//assignment 5
-$sum = 0 ;
-$nums = [5, 10, 20, 5, 30, 40];
-foreach($nums as $num){
-    if($num == 5){
-        continue ;
-    }
-    $sum += $num ;
-}
-echo $sum ."<br>"; //100
 
-//new solution assignment 5
-$sum = 0 ;
+//assignment 4
+$nums = [10, 20, 30];
+function add($num1, $num2)
+{
+    return $num1 + $num2;
+}
+echo array_reduce($nums, "add") . "<br>"; //60
+
+
+//assignment 4
+$nums = [10, 20, 30];
+$sum = 0;
+foreach ($nums as $num) {
+    $sum = $sum + $num;
+}
+echo $sum . "<br>";  //60
+
+
+
+//assignment 5
+$sum = 0;
 $nums = [5, 10, 20, 5, 30, 40];
-function check($num){
-    return $num != 5 ;
+foreach ($nums as $num) {
+    if ($num == 5) {
+        continue;
+    }
+    $sum += $num;
 }
-foreach(array_filter($nums,"check") as $num){
-    $sum += $num ;
+echo $sum . "<br>"; //100
+
+//assignment 5
+$sum = 0;
+$nums = [5, 10, 20, 5, 30, 40];
+function check($num)
+{
+    return $num != 5;
 }
-echo $sum ."<br>"; //100
+
+foreach (array_filter($nums, "check") as $num) {
+    $sum += $num;
+}
+echo $sum . "<br>"; //100
 echo "<br>";
 echo "<br>";
 
@@ -96,7 +117,7 @@ end($names);
 prev($names);
 echo current($names) . "<br>"; // "Mahmoud"
 echo "<br>";
-echo "<br>"; 
+echo "<br>";
 
 
 //assignment 8
@@ -113,19 +134,20 @@ print_r($chars);                                  // 3
 array_push($chars,  $char[0]);
 print_r($chars) . "<br>";                         // 4
 echo "<br>";
-echo "<br>"; 
+echo "<br>";
 
 
 //assignment 9
 $nums = [1, 2, 3, 4, 5, 6];
-print_r(array_slice($nums ,1,3,true)) . "<br>";               
+print_r(array_slice($nums, 1, 3, true)) . "<br>";
 echo "<br>";
-echo "<br>"; 
+echo "<br>";
 
 //assignment 10
 $mix = [1, 2, 3, "A", "B", "C", 7, 8, 9];
 $nums = [4, 5, 6];
-print_r(array_replace($mix, $nums));
+array_splice($mix, 3, 3, $nums);
+print_r($mix);
 // Output
 // Array
 // (
@@ -140,7 +162,7 @@ print_r(array_replace($mix, $nums));
 //   [8] => 9
 // )
 echo "<br>";
-echo "<br>"; 
+echo "<br>";
 
 
 
@@ -152,6 +174,7 @@ foreach ($arrs as $arr) {
 }
 echo $num . "<br>"; // 5
 echo "<br>";
+
 
 
 //assignment 12
@@ -177,6 +200,7 @@ echo $biggest_num . "<br>"; //100
 echo "<br>";
 
 
+
 //assignment 14
 $smallest_num  = $nums[0];
 foreach ($nums as $num) {
@@ -200,11 +224,33 @@ $nums_array = $num - 1; // 5
 
 $out  = "";
 
-for ($nums_array ; $nums_array >= 0 ; $nums_array--) {
+for ($nums_array; $nums_array >= 0; $nums_array--) {
     $out .= $chars[$nums_array];
 }
 echo $out . "<br>"; // Elzero
 echo "<br>";
+
+
+
+//assignment 16
+$mix = ["A", "C", "B", 1, 100, 3, 2, 6, 5, 7];
+function get($element)
+{
+    if (gettype($element) == "integer" && $element % 2 > 0) {
+        return $element;
+    }
+}
+echo "<pre>";
+print_r(array_filter($mix, "get"));
+
+// Output
+// Array
+// (
+//   [0] => 1
+//   [1] => 3
+//   [2] => 5
+//   [3] => 7
+// )
 
 
 
@@ -234,9 +280,6 @@ $title = "E&z\$r0 W\$b Sch00&";
 $result = str_replace($search, $replace, $title);
 echo $result . "<br>";  // "Elzero Web School"
 
-if (!in_array($num, $suffle_nums)) {
-    $suffle_nums[] = $nums[$rand];
-}
 $arrOne = str_split($title);
 $arrTwo = str_split($result);
 
