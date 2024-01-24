@@ -21,27 +21,24 @@ echo '<br>';
 //assignment 2
 function get_arguments(...$all)
 {
+    $data = "";
     foreach ($all as $a) {
-        echo  "$a ";
+        $data .= "$a ";
     }
-    echo '<br>';
+    return $data;
 }
-echo get_arguments("Hello", "Elzero", "Web", "School"); // Hello Elzero Web School
-echo get_arguments("I", "Love", "PHP"); // I Love PHP
-echo '<br>';
-
+echo get_arguments("Hello", "Elzero", "Web", "School") . "<br>"; // Hello Elzero Web School
+echo get_arguments("I", "Love", "PHP") . "<br>";  // I Love PHP
 
 //assignment 2
-$all = ["Hello ", "Elzero ", "Web ", "School "];
-function get_arguments_two(...$all)
+function get_arguments_two()
 {
-    foreach ($all as $a) {
+    foreach (func_get_args() as $a) {
         echo  "$a ";
     }
     echo '<br>';
 }
-echo get_arguments_two(...$all); // Hello Elzero Web School
-echo '<br>';
+echo get_arguments_two("Hello ", "Elzero ", "Web ", "School ") . "<br>";  // Hello Elzero Web School
 echo '<br>';
 
 
@@ -69,14 +66,17 @@ echo '<br>';
 echo '<br>';
 
 //assignment 4
+
 function multiply(...$numbers)
 {
     $multiply = 1;
     foreach ($numbers as $number) {
-        if (gettype($number) == "string") {
-            continue;
-        } elseif (gettype($number) == "double" || gettype($number) == "float") {
+        $type = gettype($number);
+
+        if ($type == "integer"  || $type == "double" || $type  == "float") {
             $number = (int)$number;
+        } else {
+            continue;
         }
 
         $multiply *= $number;

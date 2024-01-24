@@ -37,14 +37,16 @@ echo "<br>";
 echo "<br>";
 
 
+//assignment 4
+$nums = [10, 20, 30];
+$sum = array_reduce($nums ,function($num1 ,$num2){
+    return $num1+ $num2;
+}) . "<br>"; //60
+echo $sum ;
 
 //assignment 4
 $nums = [10, 20, 30];
-function add($num1, $num2)
-{
-    return $num1 + $num2;
-}
-echo array_reduce($nums, "add") . "<br>"; //60
+echo array_sum($nums). "<br>";  //60
 
 
 //assignment 4
@@ -57,6 +59,14 @@ echo $sum . "<br>";  //60
 
 
 
+echo "<br>";
+$numbers = [1, 2, 3, 4, 5];
+$squared = array_map(function($n) {
+    return $n * $n;
+}, $numbers);
+
+print_r($squared);
+
 //assignment 5
 $sum = 0;
 $nums = [5, 10, 20, 5, 30, 40];
@@ -68,34 +78,50 @@ foreach ($nums as $num) {
 }
 echo $sum . "<br>"; //100
 
+
+echo "assignment 5 <br>";
+
 //assignment 5
-$sum = 0;
 $nums = [5, 10, 20, 5, 30, 40];
+// solution 1
+$sum = 0;
 function check($num)
 {
     return $num != 5;
 }
-
 foreach (array_filter($nums, "check") as $num) {
     $sum += $num;
 }
 echo $sum . "<br>"; //100
+
+
+// solution 2
+$sum =array_sum(array_filter($nums, "check"));
+echo $sum . "<br>"; //100
+
+
+// solution 3
+$sum =array_sum(array_filter($nums , function($nums){
+    return $nums != 5;
+}));
+echo $sum . "<br>"; //100
+
 echo "<br>";
 echo "<br>";
 
 
-
+echo "assignment 6 <br>";
 //assignment 6
 $chars = ["A", "B", "C", "D", "E"];
 $char = "@@";
 $zero = 0;
-
 echo "<pre>";
-print_r(array_pad($chars, 10, $char[$zero]));
+print_r(array_pad($chars , strlen($char) * count($chars) , $char[$zero]));
 echo "<br>";
 echo "<br>";
 
 
+echo "assignment 7 <br>";
 //assignment 7
 $names = ["Osama", "Ahmed", "Sayed", "Mahmoud", "Ali"];
 
@@ -120,6 +146,7 @@ echo "<br>";
 echo "<br>";
 
 
+echo "assignment 8 <br>";
 //assignment 8
 $chars = ["A", "B", "C"];
 $char = ["D"];
@@ -137,16 +164,20 @@ echo "<br>";
 echo "<br>";
 
 
+echo "assignment 9 <br>";
 //assignment 9
 $nums = [1, 2, 3, 4, 5, 6];
 print_r(array_slice($nums, 1, 3, true)) . "<br>";
 echo "<br>";
 echo "<br>";
 
+
+echo "assignment 10 <br>";
 //assignment 10
 $mix = [1, 2, 3, "A", "B", "C", 7, 8, 9];
 $nums = [4, 5, 6];
-array_splice($mix, 3, 3, $nums);
+$three = count($nums);
+array_splice($mix, $three , $three , $nums);
 print_r($mix);
 // Output
 // Array
@@ -165,7 +196,7 @@ echo "<br>";
 echo "<br>";
 
 
-
+echo "assignment 11 <br>";
 //assignment 11
 $arrs = ["A", "B", "C", "D", "E"];
 $num = 0;
@@ -176,7 +207,7 @@ echo $num . "<br>"; // 5
 echo "<br>";
 
 
-
+echo "assignment 12 <br>";
 //assignment 12
 $nums = [11, 2, 10, 7, 20, 50];
 $sum = 0;
@@ -188,6 +219,7 @@ echo "<br>";
 
 
 
+echo "assignment 13 <br>";
 //assignment 13
 $nums = [10, 100, -20, 50, 30];
 $biggest_num  = $nums[0];
@@ -201,6 +233,7 @@ echo "<br>";
 
 
 
+echo "assignment 14 <br>";
 //assignment 14
 $smallest_num  = $nums[0];
 foreach ($nums as $num) {
@@ -212,15 +245,15 @@ echo $smallest_num . "<br>"; // -20
 echo "<br>";
 
 
-
+echo "assignment 15 <br>";
 //assignment 15
 $chars = ["o", "r", "e", "z", "l", "E"];
-$num = 0;
-
+$num = 0 ;
 foreach ($chars as $char) {
-    $num += 1;
+        $num ++ ;
 }
-$nums_array = $num - 1; // 5
+$index = array_search("r", $chars);
+$nums_array = $num - $index ; // 5
 
 $out  = "";
 
@@ -231,7 +264,7 @@ echo $out . "<br>"; // Elzero
 echo "<br>";
 
 
-
+echo "assignment 16 <br>";
 //assignment 16
 $mix = ["A", "C", "B", 1, 100, 3, 2, 6, 5, 7];
 function get($element)
@@ -254,6 +287,7 @@ print_r(array_filter($mix, "get"));
 
 
 
+echo "assignment 17 <br>";
 //assignment 17
 $nums = [1, 2, 3, 4, 5, 6];
 $suffle_nums = [];
@@ -272,6 +306,7 @@ echo "<pre>";
 
 
 
+echo "assignment 18 <br>";
 //assignment 18
 $search = ["&", "\$", "0"];
 $replace = ["l", "e", "o"];
